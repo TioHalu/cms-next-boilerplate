@@ -48,7 +48,7 @@ const MenuSiderFeature = () => {
             level={5}
             className="!m-0 !self-center !text-primary"
           >
-            Self Service Banking
+            Next JS - CMS
           </Title>
         )}
         {isCollapsed && (
@@ -56,7 +56,7 @@ const MenuSiderFeature = () => {
             level={5}
             className="!m-0 !inline !self-center !text-primary"
           >
-            SSB
+            CMS
           </Title>
         )}
         {bp.lg && (
