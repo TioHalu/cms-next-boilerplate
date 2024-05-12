@@ -1,0 +1,47 @@
+#!/bin/sh
+
+remote="origin";
+master_branch="master";
+remote_master_branch="$remote/$master_branch";
+folders=("pre-release" "release");
+required_branches=("dev" "sit" "uat");
+check_branch_origin=$(git branch -r --list "$remote_master_branch")
+
+if [[ ! $check_branch_origin ]]; then
+  echo "remote must '$remote' and master branch must '$remote_master_branch'";
+  exit 1;
+fi
+
+local_branch_name="$(git rev-parse --abbrev-ref HEAD)"
+
+if [[ $local_branch_name != $master_branch ]]; then
+  git switch -c "$master_branch"
+fi
+
+echo "master remote branch : $remote_master_branch";
+
+for folder in ${folders[@]}; do
+  for branch in ${required_branches[@]}; do
+    branch_name="$folder/$branch";
+    check_branch_exist=$(git branch --list "$branch_name")
+    check_branch_origin_exist=$(git branch -r --list "$remote/$branch_name")
+
+    if [[ $check_branch_exist ]]; then
+      echo "branch local found '$branch_name', this branch will remove.";
+
+      git branch --delete "$branch_name"
+      git push "$remote" ":refs/heads/$branch_name" --no-verify
+      continue ;
+    fi
+
+    if [[ $check_branch_origin_exist ]]; then
+      echo "branch remote origin found '$branch_name', this branch will remove.";
+      git push "$remote" ":refs/heads/$branch_name" --no-verify
+      continue ;
+    fi
+
+
+    echo "branch remote not found '$branch_name'";
+  done
+done
+

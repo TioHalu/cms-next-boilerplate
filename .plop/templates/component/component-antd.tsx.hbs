@@ -1,0 +1,31 @@
+import type { GetProps, GetRef } from "antd";
+import { {{componentName}} } from "antd";
+import React, { forwardRef, useRef } from "react";
+
+type {{componentName}}Ref = GetRef<typeof {{componentName}}>;
+type {{componentName}}Type = GetProps<typeof {{componentName}}>;
+export type {{pascalCase name}}Ref = Partial<{{componentName}}Ref> & {};
+export type {{pascalCase name}}Props = Omit<{{componentName}}Type, "ref"> & {};
+
+const {{pascalCase name}} = forwardRef<{{pascalCase name}}Ref, {{pascalCase name}}Props>((props, ref) => {
+  const {{camelCase componentName}}Ref = useRef<{{componentName}}Ref>(null);
+  const { ...{{camelCase componentName}}Props } = props;
+  React.useImperativeHandle(
+    ref,
+    () => {
+      return {
+        ...{{camelCase componentName}}Ref.current,
+      };
+    },
+    [{{camelCase componentName}}Ref],
+  );
+  return (
+    <{{componentName}}
+      ref={() => {{camelCase componentName}}Ref}
+      {...{{camelCase componentName}}Props}
+    />
+  );
+});
+{{pascalCase name}}.displayName = "{{pascalCase name}}";
+
+export default {{pascalCase name}};

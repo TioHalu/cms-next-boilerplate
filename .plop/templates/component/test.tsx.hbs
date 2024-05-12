@@ -1,0 +1,12 @@
+import { render, screen } from "@/tests/test-utils";
+
+import { {{pascalCase name}} } from "@/components/{{componentType}}/{{kebabCase name}}";
+
+describe("{{pascalCase name}}", () => {
+  it("should render the heading", () => {
+    render(<{{pascalCase name}} />);
+
+    // Assert
+    screen.getByRole("heading", { name: /{{titleCase name}}/i });
+  });
+});

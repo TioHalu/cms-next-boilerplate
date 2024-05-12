@@ -1,0 +1,40 @@
+#!/bin/sh
+
+remote="origin";
+master_branch="master";
+remote_master_branch="$remote/$master_branch";
+folders=("pre-release" "release");
+required_branches=("dev" "sit" "uat");
+check_branch_origin=$(git branch -r --list "$remote_master_branch")
+
+if [[ ! $check_branch_origin ]]; then
+  echo "remote must '$remote' and master branch must '$remote_master_branch'";
+  exit 1;
+fi
+
+echo "master remote branch : $remote_master_branch";
+
+for folder in ${folders[@]}; do
+  for branch in ${required_branches[@]}; do
+    branch_name="$folder/$branch";
+    check_branch_exist=$(git branch -r --list "$remote/$branch_name")
+
+    if [[ ! $check_branch_exist ]]; then
+      echo "branch remote not found '$branch_name', this branch will create automatically.";
+
+      git checkout -b "$branch_name" "$remote_master_branch"
+
+      git push "$remote" "$branch_name" --no-verify
+
+      echo "branch remote '$branch_name' successfully create.";
+
+      git checkout "$remote_master_branch"
+
+      git switch -c "$master_branch"
+      continue ;
+    fi
+
+    echo "branch remote found '$branch_name'";
+  done
+done
+
