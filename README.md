@@ -1,40 +1,142 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Boilerplate and Starter CMS with Next JS 14+, Tailwind CSS, TypeScript and Ant Design 5x
 
-## Getting Started
+🚀 Boilerplate and Starter for Next.js, Tailwind CSS and TypeScript ⚡️ Made with developer experience first: Next.js (app routing), TypeScript, ESLint, Prettier, Husky, Lint-Staged, Jest, React Testing Library, PostCSS, Tailwind CSS, Storybook, Plop, Validation.
 
-First, run the development server:
+![Cover](https://svgshare.com/i/idk.svg)
+
+## 🚀 Features
+
+Developer experience first:
+
+- [Next.js](https://nextjs.org) for Static Site Generator
+- [Ant Design](https://ant.design/) for Base UI
+- Type checking [TypeScript](https://www.typescriptlang.org)
+- Integrate with [Tailwind CSS](https://tailwindcss.com)
+- [Storybook](https://storybook.js.org) for components documentation and can testing
+- Strict Mode for TypeScript and React 18
+- Linter with [ESLint](https://eslint.org)
+- Code Formatter with [Prettier](https://prettier.io)
+- [Husky](https://typicode.github.io/husky/#/) for Git Hooks
+- [Lint-staged](https://github.com/okonet/lint-staged) for running linters on Git staged files
+- Testing with [Jest](https://jestjs.io/) and [react-testing-library](https://testing-library.com/) and [Playwright](https://playwright.dev)
+- Absolute Imports using `@` prefix
+- NextJS custom layouts
+- [T3 env](https://env.t3.gg/) Manage your environment variables with ease
+- Message convention for git
+- Commit Convention [commitizen](https://github.com/commitizen/cz-cli) for commit using cli (question & answer)
+- Maximize lighthouse score
+- Analyze Template using [Bundle Analyze](https://www.npmjs.com/package/@next/bundle-analyzer)
+- Components generation with [Plop](https://plopjs.com/) and [atomic design](https://bradfrost.com/blog/post/atomic-web-design/) convention
+- Generate branching pre-release & release (dev, sit, uat)
+
+## 📅 Plans
+
+- [next-pwa](https://github.com/shadowwalker/next-pwa)
+- Use [SWR](https://swr.vercel.app) for Integration API
+- Implementation [Redux](https://redux.js.org) from [reference](https://blog.logrocket.com/use-redux-next-js/)
+- Customize Layout top sider and left sider with ease & responsive
+- Generate Page without feature
+- Generate CRUD Page/Feature
+- Component [ChartJS](https://www.chartjs.org)
+- Util for [JSZip](https://stuk.github.io/jszip/)
+- Util for [SheetJS](https://sheetjs.com)
+- Generated CHANGELOG with [standard-version](https://www.npmjs.com/package/standard-version)
+
+## 🧪 Testing
+
+All tests are collocated with the source code inside the same directory. So, it makes it easier to find them. Coverage threshold is set to `70%`. In the `.jest` folder there is a custom provider for the all tests.
+
+## ℹ️ How To Use
+
+To use this template you can simply click in [Use this template](https://github.com/technokrat96/cms-next-boilerplate) or create your Next.js app based on this template by running:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npx create-next-app -e https://github.com/technokrat96/cms-next-boilerplate
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+After clone
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+```bash
+npm install
+```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+After add git remote, make sure master branch is **master**, to generate branch initial
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+```bash
+npm run initial-branch
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## 🚀 Deploy to production
 
-## Learn More
+You can see the results locally in production mode with:
 
-To learn more about Next.js, take a look at the following resources:
+```shell
+npm run build
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```shell
+npm run start
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## ⚙️ Generating components
 
-## Deploy on Vercel
+```bash
+npm run generate Button
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Result (if you chose an atom component):
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+```
+└── components
+      └── atoms
+        └── Button
+          ├── index.ts
+          ├── Button.stories.tsx
+          ├── Button.test.tsx
+          └── Button.tsx
+```
+
+## 😡 Git Rules & Branch Initial
+
+Please using **`master`** for name master branch
+
+### Git Flow
+
+```
+GIT Repo
+    └── master
+          └── * release/dev
+          |       └── * pre-release/dev
+          |                 └── feature/<branch feature>
+          |                 └── bug-fix/<branch bug fix>
+          |                 └── hot-fix/<branch hot fix>
+          └── * relasee/sit
+          |       └── * pre-release/sit
+          |                 └── bug-fix/<branch bug fix>
+          |                     (PR / MR to pre-release/dev too)
+          |                 └── hot-fix/<branch hot fix>
+          |                     (PR / MR to pre-release/dev too)
+          └── * relase/uat
+                  └── * pre-release/uat
+                            └── bug-fix/<branch bug fix>
+                                (PR / MR to pre-release/dev only)
+                            └── hot-fix/<branch hot fix>
+                                (PR / MR to pre-release/dev only)
+```
+
+### Git Message : [Conventional Message](https://github.com/conventional-changelog/commitlint/tree/master/%40commitlint/config-conventional)
+
+- Commit Message must be Started with :
+    - feat
+      - scope :
+        - new-feat
+        - continue-feat
+    - fix
+    - build
+    - chore
+    - docs
+    - style
+    - refactor
+    - perf
+    - test
+    - ci
